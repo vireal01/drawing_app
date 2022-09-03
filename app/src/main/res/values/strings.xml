@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Drawig app</string>
+    <string name="pick_small_brush_size">pick small brush size</string>
+    <string name="pick_medium_brush_size">pick medium brush size</string>
+    <string name="pick_large_brush_size">pick_large_brush_size</string>
+    <string name="set_brush_size">set brush size</string>
+</resources>
