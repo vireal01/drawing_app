@@ -59,6 +59,7 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
             mDrawPaint!!.strokeWidth = mDrawPath!!.brushThickness
             mDrawPaint!!.color = mDrawPath!!.color
             canvas.drawPath(mDrawPath!!, mDrawPaint!!)
+            mPaths.add(mDrawPath!!)
         }
     }
 
@@ -97,7 +98,11 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
         mDrawPaint!!.strokeWidth = mBrushSize
     }
 
-    internal inner class CustomPath(var color: Int, var brushThickness: Float): Path() {
+    fun setColor(newColor: String){
+        color = Color.parseColor(newColor)
+        mDrawPaint!!.color = color
     }
 
+    internal inner class CustomPath(var color: Int, var brushThickness: Float): Path() {
+    }
 }
