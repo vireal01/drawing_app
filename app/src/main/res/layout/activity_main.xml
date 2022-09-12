@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-        <com.example.drawigapp.DrawingView
-            android:id="@+id/drawingView"
+        <FrameLayout
+            android:id="@+id/fl_drawing_view_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/ll_paint_colors"
@@ -15,19 +14,35 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="5dp"
+            android:padding="1dp"
             android:background="@drawable/background_drawing_view_layout"
             >
-        </com.example.drawigapp.DrawingView>
+                <ImageView
+                    android:id="@+id/iv_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/troll_wall"
+                    android:scaleType="centerCrop"
+                    />
+                <com.example.drawigapp.DrawingView
+                    android:id="@+id/drawingView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80FFFFFF"
+                    >
+                </com.example.drawigapp.DrawingView>
+        </FrameLayout>
+
 
         <LinearLayout
             android:id="@+id/ll_paint_colors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/ib_change_brush_size"
+            app:layout_constraintBottom_toTopOf="@id/ll_tools"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/drawingView"
+            app:layout_constraintTop_toBottomOf="@id/fl_drawing_view_container"
             >
                 <ImageButton
                     android:layout_width="25dp"
@@ -63,21 +78,37 @@
                     />
 
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/ib_change_brush_size"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/paint_brush"
-            android:layout_marginHorizontal="40dp"
-            android:scaleType="fitXY"
+        <LinearLayout
+            android:id="@+id/ll_tools"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/ll_paint_colors"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/set_brush_size"
-            />
+            >
+                <ImageButton
+                    android:id="@+id/ib_change_brush_size"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/paint_brush"
+                    android:layout_marginHorizontal="40dp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/set_brush_size"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_set_background_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/photo"
+                    android:layout_marginHorizontal="40dp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/set_background_image"
+                    />
+        </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
