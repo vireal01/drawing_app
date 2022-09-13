@@ -9,7 +9,7 @@
             android:id="@+id/fl_drawing_view_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/ll_paint_colors"
+            app:layout_constraintBottom_toTopOf="@+id/ll_color_wrapper"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -23,19 +23,20 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/troll_wall"
                     android:scaleType="centerCrop"
+                    android:contentDescription="image view background"
                     />
                 <com.example.drawigapp.DrawingView
                     android:id="@+id/drawingView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#80FFFFFF"
+                    android:contentDescription="main drawing field"
                     >
                 </com.example.drawigapp.DrawingView>
         </FrameLayout>
 
-
         <LinearLayout
-            android:id="@+id/ll_paint_colors"
+            android:id="@+id/ll_color_wrapper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -44,46 +45,86 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fl_drawing_view_container"
             >
-                <ImageButton
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="2dp"
-                    android:src="@drawable/pallet_normal"
-                    android:tag="@color/yellow"
-                    android:background="@color/yellow"
-                    android:onClick="selectColor"
-                    android:contentDescription="yellow color picker"
-                    />
+                <LinearLayout
+                    android:id="@+id/ll_selected_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="15dp"
+                    >
+                        <ImageButton
+                            android:id="@+id/ib_selected_color"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_margin="2dp"
+                            android:src="@drawable/pallet_current_color"
+                            android:background="@color/black"
+                            android:contentDescription="black color picker"
+                            />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_paint_colors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toEndOf="@id/ll_selected_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    >
+                        <ImageButton
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_margin="2dp"
+                            android:src="@drawable/pallet_normal"
+                            android:tag="@color/black"
+                            android:background="@color/black"
+                            android:onClick="selectColor"
+                            android:contentDescription="black color picker"
+                            />
+
+                        <ImageButton
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_margin="2dp"
+                            android:src="@drawable/pallet_normal"
+                            android:tag="@color/yellow"
+                            android:background="@color/yellow"
+                            android:onClick="selectColor"
+                            android:contentDescription="yellow color picker"
+                            />
+
+                        <ImageButton
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_margin="2dp"
+                            android:src="@drawable/pallet_normal"
+                            android:tag="@color/blue"
+                            android:background="@color/blue"
+                            android:onClick="selectColor"
+                            android:contentDescription="blue color picker"
+                            />
+
+                </LinearLayout>
 
                 <ImageButton
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:id="@+id/ib_select_color"
+                    android:src="@drawable/color_wheel"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_margin="2dp"
-                    android:src="@drawable/pallet_normal"
-                    android:tag="@color/blue"
-                    android:background="@color/blue"
-                    android:onClick="selectColor"
-                    android:contentDescription="blue color picker"
+                    android:backgroundTint="@color/white"
+                    android:onClick="toggleColorPicker"
+                    android:contentDescription="open color picker dialog"
                     />
-
-                <ImageButton
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="2dp"
-                    android:src="@drawable/pallet_normal"
-                    android:tag="@color/black"
-                    android:background="@color/black"
-                    android:onClick="selectColor"
-                    android:contentDescription="black color picker"
-                    />
-
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_tools"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ll_paint_colors"
+            app:layout_constraintTop_toBottomOf="@id/ll_color_wrapper"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
 
 class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
     private var mDrawPath: CustomPath? = null
@@ -23,9 +22,6 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
 
     init{
         setupDrawing()
-//        changeColorBtn?.setOnClickListener{
-//            color = Color.BLUE
-//        }
     }
 
     private fun setupDrawing(){

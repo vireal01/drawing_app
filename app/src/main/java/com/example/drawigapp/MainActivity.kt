@@ -1,18 +1,21 @@
 package com.example.drawigapp
 
 import android.app.Dialog
-import android.media.Image
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorLong
 import androidx.core.view.get
-import androidx.core.view.iterator
 import androidx.core.view.size
+import com.skydoves.colorpickerview.ColorPickerDialog
+import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     private var changeBrushSizeBtn: ImageButton? = null
     private var mImageButtonCurrentPaint: ImageButton? = null
     private var linearLayoutPaintColors: LinearLayout? = null
-//    private var
+    private var choosenColorIB: ImageButton? = null
+
 //    private var smallBtn: ImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +33,11 @@ class MainActivity : AppCompatActivity() {
 
         drawingView = findViewById(R.id.drawingView)
         drawingView?.setSizeOfBrush(20.toFloat())
+        choosenColorIB = findViewById(R.id.ib_selected_color)
 
         linearLayoutPaintColors = findViewById<LinearLayout>(R.id.ll_paint_colors)
 
-        mImageButtonCurrentPaint = linearLayoutPaintColors!![linearLayoutPaintColors!!.size - 1] as ImageButton
+        mImageButtonCurrentPaint = linearLayoutPaintColors!![0] as ImageButton
         mImageButtonCurrentPaint!!.setImageDrawable(
             ContextCompat.getDrawable(this, R.drawable.pallet_selected)
         )
@@ -40,8 +45,6 @@ class MainActivity : AppCompatActivity() {
         changeBrushSizeBtn?.setOnClickListener{
             showBrushSizeChooserDialog()
         }
-//        smallBtn = findViewById(R.id.ib_small_brush)
-
     }
 
     fun showBrushSizeChooserDialog(){
@@ -73,6 +76,9 @@ class MainActivity : AppCompatActivity() {
         if(view !== mImageButtonCurrentPaint){
             val imageButton = view as ImageButton
             val colorTag = imageButton.tag.toString()
+            val colorTagInt = Color.parseColor(colorTag)
+            println(colorTag.replace("#", ""))
+            choosenColorIB!!.setBackgroundColor(colorTagInt)
             drawingView?.setColor(colorTag)
             for ( i in 0 until  linearLayoutPaintColors!!.size) {
                 val imgBtn = linearLayoutPaintColors!![i] as ImageButton
@@ -85,5 +91,23 @@ class MainActivity : AppCompatActivity() {
             )
             mImageButtonCurrentPaint = imageButton
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun toggleColorPicker(view: View) {
+        ColorPickerDialog.Builder(this)
+            .setTitle("Pick a color")
+            .setPreferenceName("MyColorPickerDialog")
+            .setPositiveButton("Confirm",
+                ColorEnvelopeListener { envelope, _ ->
+                    val newColor = Integer.toHexString(Color.toArgb(envelope.color.toColorLong()))
+                    drawingView?.setColor("#".plus(newColor))
+                    choosenColorIB!!.setBackgroundColor(envelope.color)
+                })
+            .setNegativeButton("Cancel") { dialogInterface, _ -> dialogInterface.dismiss() }
+            .attachAlphaSlideBar(false)
+            .attachBrightnessSlideBar(true)
+            .setBottomSpace(12)
+            .show()
     }
 }

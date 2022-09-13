@@ -18,7 +18,7 @@
     <item>
         <shape>
             <stroke
-                android:color="#FF0202"
+                android:color="#FFFFFF"
                 android:width="3dp"/>
             <corners android:radius="5dp"/>
         </shape>
