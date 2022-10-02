@@ -25,14 +25,14 @@
                     android:scaleType="centerCrop"
                     android:contentDescription="image view background"
                     />
-                <com.example.drawigapp.DrawingView
+                <com.example.drawingapp.DrawingView
                     android:id="@+id/drawingView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#80FFFFFF"
                     android:contentDescription="main drawing field"
                     >
-                </com.example.drawigapp.DrawingView>
+                </com.example.drawingapp.DrawingView>
         </FrameLayout>
 
         <LinearLayout
@@ -138,6 +138,26 @@
                     android:layout_marginHorizontal="40dp"
                     android:scaleType="fitXY"
                     android:contentDescription="@string/set_brush_size"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_undo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/undo"
+                    android:layout_marginHorizontal="40dp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/undo_btn"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_redo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/redo"
+                    android:layout_marginHorizontal="40dp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/redo_btn"
                     />
                 <ImageButton
                     android:id="@+id/ib_set_background_image"

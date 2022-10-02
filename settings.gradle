@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Drawig app"
+rootProject.name = "Drawing app"
 include ':app'

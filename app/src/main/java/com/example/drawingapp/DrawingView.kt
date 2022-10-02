@@ -1,4 +1,4 @@
-package com.example.drawigapp
+package com.example.drawingapp
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,8 +17,7 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
     private var color = Color.BLACK
     private var canvas: Canvas? = null
     private var mPaths = ArrayList<CustomPath>()
-//    private val changeColorBtn: Button? = findViewById(R.id.changeColor)
-
+    private val mUndoPath = ArrayList<CustomPath>()
 
     init{
         setupDrawing()
@@ -43,7 +42,9 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
     // fix Canvas to Canvas? if fails
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawBitmap(mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
+        mCanvasBitmap?.let {
+            canvas.drawBitmap(mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
+        }
 
         for(path in mPaths){
             mDrawPaint!!.strokeWidth = path.brushThickness
@@ -55,7 +56,6 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
             mDrawPaint!!.strokeWidth = mDrawPath!!.brushThickness
             mDrawPaint!!.color = mDrawPath!!.color
             canvas.drawPath(mDrawPath!!, mDrawPaint!!)
-            mPaths.add(mDrawPath!!)
         }
     }
 
@@ -77,8 +77,8 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
             }
 
             MotionEvent.ACTION_UP -> {
-                mDrawPath = CustomPath(color, mBrushSize)
                 mPaths.add(mDrawPath!!)
+                mDrawPath = CustomPath(color, mBrushSize)
             }
             else -> return false
         }
@@ -99,6 +99,20 @@ class DrawingView(context: Context, attrs: AttributeSet? = null) : View(context,
         mDrawPaint!!.color = color
     }
 
-    internal inner class CustomPath(var color: Int, var brushThickness: Float): Path() {
+    fun undoMPath() {
+        if(mPaths.size > 0){
+            mUndoPath.add(mPaths.removeAt(mPaths.size - 1))
+            invalidate()
+        }
+    }
+
+    fun redoMPath() {
+        if(mUndoPath.size > 0){
+            mPaths.add(mUndoPath.removeAt(mUndoPath.size - 1))
+            invalidate()
+        }
+    }
+
+    inner class CustomPath(var color: Int, var brushThickness: Float): Path() {
     }
 }
