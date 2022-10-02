@@ -5,4 +5,7 @@
     <string name="pick_large_brush_size">pick_large_brush_size</string>
     <string name="set_brush_size">set brush size</string>
     <string name="set_background_image">set background image</string>
+    <string name="save">save image</string>
+    <string name="redo">redo changes</string>
+    <string name="undo">undo changes</string>
 </resources>

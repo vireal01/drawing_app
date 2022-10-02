@@ -21,7 +21,6 @@
                     android:id="@+id/iv_background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/troll_wall"
                     android:scaleType="centerCrop"
                     android:contentDescription="image view background"
                     />
@@ -147,7 +146,7 @@
                     android:src="@drawable/undo"
                     android:layout_marginHorizontal="40dp"
                     android:scaleType="fitXY"
-                    android:contentDescription="@string/undo_btn"
+                    android:contentDescription="@string/undo"
                     />
                 <ImageButton
                     android:id="@+id/ib_redo"
@@ -157,7 +156,7 @@
                     android:src="@drawable/redo"
                     android:layout_marginHorizontal="40dp"
                     android:scaleType="fitXY"
-                    android:contentDescription="@string/redo_btn"
+                    android:contentDescription="@string/redo"
                     />
                 <ImageButton
                     android:id="@+id/ib_set_background_image"
@@ -168,6 +167,16 @@
                     android:layout_marginHorizontal="40dp"
                     android:scaleType="fitXY"
                     android:contentDescription="@string/set_background_image"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_save"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/save"
+                    android:layout_marginHorizontal="40dp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/save"
                     />
         </LinearLayout>
 
